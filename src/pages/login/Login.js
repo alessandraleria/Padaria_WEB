@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import api from "../../services/api";
+import {
+  Container,
+  Input,
+  ButtonPrimary,
+  Heading1,
+  CenterSection,
+  DetailText,
+} from "../../components/common";
 
-import "./Login.css";
+import api from "../../services/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -40,31 +47,49 @@ const Login = () => {
   }
 
   return (
-    <div className="login-container">
-      <section className="form">
-        <form onSubmit={handleLogin}>
-          <h1>Faça seu Login</h1>
+    <CenterSection>
+      <Container style={{ padding: "3rem" }}>
+        <Heading1
+          style={{
+            textAlign: "center",
+            textDecoration: "underline",
+            marginBottom: "4rem",
+          }}
+        >
+          Login
+        </Heading1>
+        <form
+          onSubmit={handleLogin}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <DetailText>Email:</DetailText>
+            <Input
+              type="email"
+              placeholder="Digite seu email"
+              value={email}
+              autofocus
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-          <input
-            type="email"
-            placeholder="Seu e-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <input
-            type="password"
-            placeholder="Sua senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <button className="button" type="submit">
-            Entrar
-          </button>
+          <div>
+            <DetailText>Senha:</DetailText>
+            <Input
+              type="password"
+              placeholder="Digite sua senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <ButtonPrimary type="submit">Entrar</ButtonPrimary>
         </form>
-      </section>
-    </div>
+      </Container>
+    </CenterSection>
   );
 };
 
