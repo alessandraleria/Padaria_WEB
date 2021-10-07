@@ -1,16 +1,22 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./pages/login/Login";
+import { ThemeProvider } from "styled-components";
+
+import { GlobalStyle, theme } from "./style/global";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact>
-          <Login/>
-        </Route>
-      </Switch>
-    </Router>    
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Login />
+          </Route>
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
 }
 
