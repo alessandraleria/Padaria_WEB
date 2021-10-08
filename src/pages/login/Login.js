@@ -28,11 +28,10 @@ const Login = () => {
       });
 
       if (response.data) {
-        if (response.status == 0) {
-          alert("\nE-mail incorreto!");
-        } else if (response.status == 2) {
-          alert("\nSenha incorreta!");
+        if (response.status !== 1) {
+          alert(response.message);
         } else {
+          localStorage.setItem("isAuthenticated", true);
           history.push("/home");
         }
       } else {

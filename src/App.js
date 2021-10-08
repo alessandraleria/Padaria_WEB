@@ -11,9 +11,7 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
-          <Route path="/" exact>
-            <Login />
-          </Route>
+          <Route exact path="/" component={Login} />
         </Switch>
       </Router>
     </ThemeProvider>
