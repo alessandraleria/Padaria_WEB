@@ -61,11 +61,3 @@ export const ButtonPrimary = styled.button`
   width: 70%;
   cursor: pointer;
 `;
-
-export const ButtonSecondary = styled(ButtonPrimary)`
-  background-color: ${(props) => props.theme.secondary};
-`;
-
-export const ButtonDanger = styled(ButtonPrimary)`
-  background-color: ${(props) => props.theme.error};
-`;
