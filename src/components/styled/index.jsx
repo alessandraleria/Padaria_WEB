@@ -37,6 +37,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
 `;
 
 export const CenterSection = styled.div`

@@ -8,7 +8,7 @@ import {
   Heading1,
   CenterSection,
   DetailText,
-} from "../../components/common";
+} from "../../components/styled";
 
 import api from "../../services/api";
 
@@ -32,7 +32,7 @@ const Login = () => {
           alert(response.message);
         } else {
           localStorage.setItem("isAuthenticated", true);
-          history.push("/home");
+          history.push("/estoque");
         }
       } else {
         alert(
