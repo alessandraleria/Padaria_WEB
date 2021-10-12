@@ -5,7 +5,6 @@ import Status from "./Status";
 const StyledTable = styled.table`
   border: none;
   border-collapse: collapse;
-  border-radius: 2rem;
   font-size: 1.8rem;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
   width: 70vw;
@@ -15,11 +14,11 @@ const StyledTable = styled.table`
     padding: 1.8rem 1.5rem;
   }
 
-  thead,
   th {
     position: sticky;
     top: 0;
     z-index: 1;
+    background-color: ${(props) => props.theme.topBar};
   }
 
   tbody tr {
@@ -29,7 +28,6 @@ const StyledTable = styled.table`
   }
 
   thead > tr {
-    background-color: ${(props) => props.theme.topBar};
     color: ${(props) => props.theme.black};
     text-align: center;
     text-decoration: underline;
@@ -67,41 +65,49 @@ export default function Table({ data, columnNames }) {
 }
 
 const TableMarkup = ({ titles, data, columnNames }) => (
-  <div style={{ height: "100%", overflow: "scroll" }}>
-    <StyledTable>
-      <colgroup>
-        <col />
-        <col />
-        <col />
-        <col />
-        <col />
-      </colgroup>
-      <thead>
-        <tr>
-          {columnNames.map((columnNames, index) => (
-            <th key={index}>{columnNames}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={index}>
-            {titles.map((title, index) => {
-              if (title === "status") {
-                return (
-                  <td key={index} style={{ width: "100px" }}>
-                    <Status
-                      qtt={item.current_quantity - item.minimum_quantity}
-                    />
-                  </td>
-                );
-              } else {
-                return <td key={index}>{item[title]}</td>;
-              }
-            })}
+  <div
+    style={{
+      maxHeight: "70vh",
+      overflow: "hidden",
+      borderRadius: "2rem",
+    }}
+  >
+    <div style={{ maxHeight: "69vh", overflowY: "scroll" }}>
+      <StyledTable>
+        <colgroup>
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            {columnNames.map((columnNames, index) => (
+              <th key={index}>{columnNames}</th>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </StyledTable>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={index}>
+              {titles.map((title, index) => {
+                if (title === "status") {
+                  return (
+                    <td key={index} style={{ width: "100px" }}>
+                      <Status
+                        qtt={item.current_quantity - item.minimum_quantity}
+                      />
+                    </td>
+                  );
+                } else {
+                  return <td key={index}>{item[title]}</td>;
+                }
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </StyledTable>
+    </div>
   </div>
 );
