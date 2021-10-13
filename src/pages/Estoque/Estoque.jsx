@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { BsPlusSquareDotted } from "react-icons/bs";
-import { TiPencil } from "react-icons/ti";
 
-import { CenterSection, Heading1 } from "../../components/styled";
+import { CenterSection } from "../../components/styled";
 import NavBar from "../../components/NavBar/NavBar";
-import IconButton from "../../components/IconButton/IconButton";
 import Table from "../../components/Table/Table";
 import { dados } from "./data";
 import api from "../../services/api";
+import PageHeader from "../../components/PageHeader/PageHeader";
+import { useHistory } from "react-router";
 
 export default function Estoque() {
   const [data, setData] = useState(
     dados.map(({ id, createdAt, updatedAt, ...item }) => item)
   );
+
+  const history = useHistory();
+
   useEffect(() => {
     /* async function fetchEstoque() {
       try {
@@ -33,6 +35,14 @@ export default function Estoque() {
     fetchEstoque(); */
   }, [data]);
 
+  const handleEdit = () => {};
+
+  const handleAdd = () => {};
+
+  const handleFuncionariosPage = () => {
+    history.push("/funcionarios");
+  };
+
   return (
     <CenterSection>
       <div
@@ -51,53 +61,29 @@ export default function Estoque() {
             paddingRight: "30px",
           }}
         >
-          <NavBar />
+          <NavBar
+            handleFuncionarioClick={handleFuncionariosPage}
+            activePage={"Estoque"}
+          />
         </div>
         <div style={{ gridColumn: "2 / auto", gridRow: "1/2" }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Heading1
-              style={{
-                textDecoration: "underline",
-                marginBottom: "4rem",
-              }}
-            >
-              Estoque
-            </Heading1>
-            <div>
-              <div
-                style={{
-                  display: "inline-block",
-                  marginRight: "40px",
-                }}
-              >
-                <IconButton icon={<TiPencil size={20} />} text={"Editar"} />
-              </div>
-              <div style={{ display: "inline-block" }}>
-                <IconButton
-                  icon={<BsPlusSquareDotted size={20} />}
-                  text={"Cadastrar"}
-                />
-              </div>
-            </div>
-          </div>
-          <div style={{ gridColumn: "2 / auto", gridRow: "2/auto" }}>
-            <Table
-              data={data}
-              columnNames={[
-                "Código",
-                "Nome do Produto",
-                "Qtd. Atual",
-                "Qtd. Mínima",
-                "Status",
-              ]}
-            />
-          </div>
+          <PageHeader
+            handleEdit={handleEdit}
+            handleAdd={handleAdd}
+            title={"Estoque"}
+          />
+        </div>
+        <div style={{ gridColumn: "2 / auto", gridRow: "2/auto" }}>
+          <Table
+            data={data}
+            columnNames={[
+              "Código",
+              "Nome do Produto",
+              "Qtd. Atual",
+              "Qtd. Mínima",
+              "Status",
+            ]}
+          />
         </div>
       </div>
     </CenterSection>
