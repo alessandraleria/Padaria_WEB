@@ -9,9 +9,20 @@ import { useHistory } from "react-router";
 import PageHeader from "../../components/PageHeader/PageHeader";
 
 export default function Funcionarios() {
-  const [data, setData] = useState(
-    dados.map(({ id, createdAt, updatedAt, ...item }) => item)
-  );
+  function formatData({
+    access_level,
+    name,
+    last_name,
+    password,
+    cpf,
+    ...item
+  }) {
+    let newObj = { cpf: cpf, name: `${name} ${last_name}`, ...item };
+
+    return newObj;
+  }
+
+  const [data, setData] = useState(dados.map((obj) => formatData(obj)));
 
   const history = useHistory();
 
@@ -76,13 +87,7 @@ export default function Funcionarios() {
         <div style={{ gridColumn: "2 / auto", gridRow: "2/auto" }}>
           <Table
             data={data}
-            columnNames={[
-              "Código",
-              "Nome do Produto",
-              "Qtd. Atual",
-              "Qtd. Mínima",
-              "Status",
-            ]}
+            columnNames={["CPF", "Nome", "Email", "Telefone", "Endereço"]}
           />
         </div>
       </div>
