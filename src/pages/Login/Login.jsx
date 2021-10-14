@@ -73,6 +73,7 @@ const Login = () => {
               value={email}
               autoFocus
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
 
@@ -83,6 +84,7 @@ const Login = () => {
               placeholder="Digite sua senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <ButtonPrimary type="submit">Entrar</ButtonPrimary>

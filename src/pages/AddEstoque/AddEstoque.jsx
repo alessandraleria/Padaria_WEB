@@ -75,12 +75,14 @@ export default function AddEstoque() {
               type="text"
               value={productName}
               autoFocus
+              required
               onChange={(e) => setProductName(e.target.value)}
             />
           </div>
           <div>
             <DetailText>Quantidade Atual:</DetailText>
             <Input
+              required
               type="number"
               value={currentQuantity}
               onChange={(e) => setCurrentQuantity(e.target.value)}
@@ -89,6 +91,7 @@ export default function AddEstoque() {
           <div>
             <DetailText>Quantidade Mínima:</DetailText>
             <Input
+              required
               type="number"
               value={minimumQuantity}
               onChange={(e) => setMinimumQuantity(e.target.value)}
