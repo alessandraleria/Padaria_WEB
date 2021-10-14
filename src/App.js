@@ -9,6 +9,8 @@ import Estoque from "./pages/Estoque/Estoque";
 import Funcionarios from "./pages/Funcionarios/Funcionarios";
 import AddEstoque from "./pages/AddEstoque/AddEstoque";
 import AddFuncionario from "./pages/AddFuncionario/AddFuncionario";
+import EditEstoque from "./pages/EditEstoque/EditEstoque";
+import EditFuncionario from "./pages/EditFuncionario/EditFuncionario";
 
 function App() {
   return (
@@ -19,7 +21,9 @@ function App() {
           <Route exact path="/" component={Login} />
           <PrivateRoute path="/estoque" component={Estoque} />
           <PrivateRoute path="/funcionarios" component={Funcionarios} />
+          <PrivateRoute path="/editEstoque" component={EditEstoque} />
           <PrivateRoute path="/addEstoque" component={AddEstoque} />
+          <PrivateRoute path="/editFuncionario" component={EditFuncionario} />
           <PrivateRoute path="/addFuncionario" component={AddFuncionario} />
         </Switch>
       </Router>

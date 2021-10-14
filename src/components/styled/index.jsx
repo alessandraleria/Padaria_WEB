@@ -75,3 +75,15 @@ export const ButtonDanger = styled.button`
   width: 70%;
   cursor: pointer;
 `;
+export const ButtonBlack = styled.button`
+  padding: 1rem 3rem;
+  margin: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: ${(props) => props.theme.white};
+  background-color: ${(props) => props.theme.black};
+  border-radius: 40px;
+  border-width: 0;
+  width: 70%;
+  cursor: pointer;
+`;
