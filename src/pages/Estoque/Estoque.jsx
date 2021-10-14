@@ -37,7 +37,9 @@ export default function Estoque() {
 
   const handleEdit = () => {};
 
-  const handleAdd = () => {};
+  const handleAdd = () => {
+    history.push("/addEstoque");
+  };
 
   const handleFuncionariosPage = () => {
     history.push("/funcionarios");
