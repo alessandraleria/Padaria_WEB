@@ -23,6 +23,7 @@ export default function PageHeader({ handleEdit, handleAdd, title }) {
       </Heading1>
       <div>
         <div
+          onClick={handleEdit}
           style={{
             display: "inline-block",
             marginRight: "40px",
@@ -30,7 +31,7 @@ export default function PageHeader({ handleEdit, handleAdd, title }) {
         >
           <IconButton icon={<TiPencil size={20} />} text={"Editar"} />
         </div>
-        <div style={{ display: "inline-block" }}>
+        <div onClick={handleAdd} style={{ display: "inline-block" }}>
           <IconButton
             icon={<BsPlusSquareDotted size={20} />}
             text={"Cadastrar"}

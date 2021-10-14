@@ -48,7 +48,9 @@ export default function Funcionarios() {
 
   const handleEdit = () => {};
 
-  const handleAdd = () => {};
+  const handleAdd = () => {
+    history.push("/addFuncionario");
+  };
 
   const handleEstoquesPage = () => {
     history.push("/estoque");

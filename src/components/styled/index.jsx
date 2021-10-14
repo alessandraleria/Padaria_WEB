@@ -30,7 +30,7 @@ export const Input = styled.input`
 
 // Container
 export const Container = styled.div`
-  width: 300px;
+  max-width: 400px;
   background-color: ${(props) => props.theme.white};
   border-radius: 15px;
   padding: 1.5rem 2rem;
@@ -57,6 +57,19 @@ export const ButtonPrimary = styled.button`
   font-weight: 700;
   color: ${(props) => props.theme.white};
   background-color: ${(props) => props.theme.primary};
+  border-radius: 40px;
+  border-width: 0;
+  width: 70%;
+  cursor: pointer;
+`;
+
+export const ButtonDanger = styled.button`
+  padding: 1rem 3rem;
+  margin: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: ${(props) => props.theme.white};
+  background-color: ${(props) => props.theme.red};
   border-radius: 40px;
   border-width: 0;
   width: 70%;
