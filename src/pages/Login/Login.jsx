@@ -39,8 +39,8 @@ const Login = () => {
       });
 
       if (response.data) {
-        if (response.status !== 1) {
-          alert(response.message);
+        if (response.data.status !== 1) {
+          alert(response.data.message);
         } else {
           localStorage.setItem("isAuthenticated", true);
           history.push("/estoque");

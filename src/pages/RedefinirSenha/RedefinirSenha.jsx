@@ -22,15 +22,14 @@ export default function RedefinirSenha({ handleCancel }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    /* try {
-      const response = await api.post("users/login", {
+     try {
+      const response = await api.post("users/redefinePassword", {
         email,
-        password,
+        cpf,
       });
-
       if (response.data) {
-        if (response.status !== 1) {
-          alert(response.message);
+        if (response.data.success !== true) {
+          alert(response.data.message);
         } else {
           localStorage.setItem("isAuthenticated", true);
           history.push("/estoque");
@@ -43,7 +42,7 @@ export default function RedefinirSenha({ handleCancel }) {
     } catch (err) {
       console.log("Erro: " + err);
       alert("Falha no login, tente novamente.");
-    } */
+    } 
   }
 
   return (
