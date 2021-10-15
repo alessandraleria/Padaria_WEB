@@ -16,6 +16,15 @@ export const DetailText = styled.span`
   margin-bottom: 1.5rem;
 `;
 
+export const LinkText = styled.span`
+  font-size: 2rem;
+  color: ${(props) => props.theme.primary};
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 400;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+`;
 // Inputs
 export const Input = styled.input`
   border: 1px solid ${(props) => props.theme.primary};
