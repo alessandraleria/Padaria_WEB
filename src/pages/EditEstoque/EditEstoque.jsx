@@ -16,6 +16,7 @@ import api from "../../services/api";
 
 export default function EditEstoque() {
   const [productId, setProductId] = useState("");
+  const [productCode, setProductCode] = useState("");
   const [productName, setProductName] = useState("");
   const [currentQuantity, setCurrentQuantity] = useState(null);
   const [minimumQuantity, setMinimumQuantity] = useState(null);
@@ -27,11 +28,54 @@ export default function EditEstoque() {
     history.push("/estoque");
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
+    console.log(productCode);
+    try {
+      const response = await api.post("/products/find", {
+        code: productCode
+      });
+
+      if (response.data) {
+        setProductId(response.data.id);
+        setProductCode(response.data.code);
+        setProductName(response.data.name);
+        setCurrentQuantity(response.data.current_quantity);
+        setMinimumQuantity(response.data.minimum_quantity);
+      } else {
+        alert(
+          "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
+        );
+      }
+    } catch (err) {
+      console.log("Erro: " + err);
+      alert("Falha carregando dados de estoque, tente novamente.");
+    }
   };
 
-  const handleDelete = (e) => {};
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await api.post("products/delete", {
+        id: productId,
+      });
+      
+      if (response.data) {
+        if (response.data.success) {
+          alert("Produto deletado com sucesso!");
+          history.push("/estoque");
+        }
+      } else {
+        alert(
+          "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
+        );
+      }
+    } catch (err) {
+      console.log("Erro: " + err);
+      alert("Falha na exclusão, tente novamente.");
+    }
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -45,8 +89,8 @@ export default function EditEstoque() {
       });
 
       if (response.data) {
-        alert(response.message);
-        if (response.success) {
+        alert("Produto atualizado com sucesso!");
+        if (response.data.success) {
           history.push("/estoque");
         }
       } else {
@@ -82,13 +126,13 @@ export default function EditEstoque() {
           }}
         >
           <div>
-            <DetailText>Insira o ID do produto:</DetailText>
+            <DetailText>Insira o Código do produto:</DetailText>
             <Input
               style={{ marginBottom: "0", marginRight: "20px", width: "95%" }}
               type="text"
-              value={productId}
+              value={productCode}
               autoFocus
-              onChange={(e) => setProductId(e.target.value)}
+              onChange={(e) => setProductCode(e.target.value)}
             />
           </div>
           <ButtonPrimary
@@ -100,6 +144,7 @@ export default function EditEstoque() {
               justifyContent: "center",
               alignItems: "center",
             }}
+            type="submit"
           >
             <div>
               <BiSearchAlt size={30} />

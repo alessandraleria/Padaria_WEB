@@ -12,6 +12,7 @@ import {
 import api from "../../services/api";
 
 export default function AddEstoque() {
+  const [productCode, setProductCode] = useState("");
   const [productName, setProductName] = useState("");
   const [currentQuantity, setCurrentQuantity] = useState();
   const [minimumQuantity, setMinimumQuantity] = useState();
@@ -28,14 +29,15 @@ export default function AddEstoque() {
 
     try {
       const response = await api.post("products/create", {
+        code: productCode,
         name: productName,
         current_quantity: currentQuantity,
         minimum_quantity: minimumQuantity,
       });
 
       if (response.data) {
-        alert(response.message);
-        if (response.success) {
+        alert(response.data.message);
+        if (response.data.success) {
           history.push("/estoque");
         }
       } else {
@@ -45,7 +47,7 @@ export default function AddEstoque() {
       }
     } catch (err) {
       console.log("Erro: " + err);
-      alert("Falha no login, tente novamente.");
+      alert("Código já cadastrado!");
     }
   }
 
@@ -69,6 +71,16 @@ export default function AddEstoque() {
             alignItems: "center",
           }}
         >
+          <div>
+            <DetailText>Código do produto:</DetailText>
+            <Input
+              type="text"
+              value={productCode}
+              autoFocus
+              required
+              onChange={(e) => setProductCode(e.target.value)}
+            />
+          </div>
           <div>
             <DetailText>Nome do produto:</DetailText>
             <Input

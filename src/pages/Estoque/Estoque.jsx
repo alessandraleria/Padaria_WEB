@@ -16,12 +16,12 @@ export default function Estoque() {
   const history = useHistory();
 
   useEffect(() => {
-    /* async function fetchEstoque() {
+     async function fetchEstoque() {
       try {
         const response = await api.get("/products");
 
         if (response.data) {
-          setData(response);
+          setData(response.data);
         } else {
           alert(
             "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
@@ -32,8 +32,8 @@ export default function Estoque() {
         alert("Falha carregando dados de estoque, tente novamente.");
       }
     }
-    fetchEstoque(); */
-  }, [data]);
+    fetchEstoque(); 
+  }, []);
 
   const handleEdit = () => {
     history.push("/editEstoque");
