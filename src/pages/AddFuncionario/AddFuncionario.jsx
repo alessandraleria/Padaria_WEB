@@ -44,7 +44,7 @@ export default function AddFuncionario() {
     };
 
     console.log(newObj);
-    /* try {
+    try {
       const response = await api.post("users/create", {
         access_level: accessLevel,
         name: name,
@@ -56,8 +56,8 @@ export default function AddFuncionario() {
       });
 
       if (response.data) {
-        alert(response.message);
-        if (response.success) {
+        alert(response.data.message);
+        if (response.data.success) {
           history.push("/funcionarios");
         }
       } else {
@@ -67,8 +67,8 @@ export default function AddFuncionario() {
       }
     } catch (err) {
       console.log("Erro: " + err);
-      alert("Falha no login, tente novamente.");
-    } */
+      alert("CPF já cadastrado!");
+    }
   }
 
   return (

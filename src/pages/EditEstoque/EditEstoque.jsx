@@ -100,7 +100,7 @@ export default function EditEstoque() {
       }
     } catch (err) {
       console.log("Erro: " + err);
-      alert("Falha no login, tente novamente.");
+      alert("Falha na edição de produto, tente novamente.");
     }
   }
 

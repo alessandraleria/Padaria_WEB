@@ -27,12 +27,12 @@ export default function Funcionarios() {
   const history = useHistory();
 
   useEffect(() => {
-    /* async function fetchEstoque() {
+    async function fetchFuncionarios() {
       try {
-        const response = await api.get("/products");
+        const response = await api.get("/users");
 
         if (response.data) {
-          setData(response);
+          setData(response.data);
         } else {
           alert(
             "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
@@ -43,8 +43,8 @@ export default function Funcionarios() {
         alert("Falha carregando dados de estoque, tente novamente.");
       }
     }
-    fetchEstoque(); */
-  }, [data]);
+    fetchFuncionarios(); 
+  }, []);
 
   const handleEdit = () => {
     history.push("/editFuncionario");

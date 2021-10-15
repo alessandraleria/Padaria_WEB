@@ -32,30 +32,62 @@ export default function EditFuncionario() {
     history.push("/funcionarios");
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await api.post("/users/find", {
+        cpf: cpf
+      });
+
+      console.log(response);
+
+      if (response.data) {
+        setName(response.data.name);
+        setLastName(response.data.last_name);
+        setEmail(response.data.email);
+        setPhone(response.data.phone);
+        //set Endereço
+        
+      } else {
+        alert(
+          "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
+        );
+      }
+    } catch (err) {
+      console.log("Erro: " + err);
+      alert("Falha carregando dados de funcionários, tente novamente.");
+    }
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await api.post("users/delete", {
+        cpf: cpf,
+      });
+      
+      if (response.data) {
+        if (response.data.success) {
+          alert("Usuário excluído com sucesso!");
+          history.push("/funcionarios");
+        }
+      } else {
+        alert(
+          "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
+        );
+      }
+    } catch (err) {
+      console.log("Erro: " + err);
+      alert("Falha na exclusão, tente novamente.");
+    }
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    const newObj = {
-      name: name,
-      last_name: lastName,
-      email: email,
-      cpf: cpf,
-      phone: phone,
-      address: `${rua}, ${numero}, ${cidade}`,
-    };
-
-    console.log(newObj);
-    /* try {
+    try {
       const response = await api.post("users/edit", {
-        access_level: accessLevel,
         name: name,
         last_name: lastName,
         email: email,
@@ -65,8 +97,8 @@ export default function EditFuncionario() {
       });
 
       if (response.data) {
-        alert(response.message);
-        if (response.success) {
+        if (response.data.success) {
+          alert("Funcionário atualizado com sucesso!");
           history.push("/funcionarios");
         }
       } else {
@@ -77,7 +109,7 @@ export default function EditFuncionario() {
     } catch (err) {
       console.log("Erro: " + err);
       alert("Falha no login, tente novamente.");
-    } */
+    } 
   }
 
   return (
@@ -90,7 +122,7 @@ export default function EditFuncionario() {
             marginBottom: "4rem",
           }}
         >
-          Cadastro de novo funcionário:
+          Edição de funcionário:
         </Heading1>
         <form
           onSubmit={handleSearch}
@@ -108,6 +140,7 @@ export default function EditFuncionario() {
               style={{ marginBottom: "0", marginRight: "20px", width: "100%" }}
               type="text"
               value={cpf}
+              name="cpf"
               autoFocus
               onChange={(e) => setCpf(e.target.value)}
             />
