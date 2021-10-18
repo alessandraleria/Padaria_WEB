@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { BsBoxSeam } from "react-icons/bs";
 import { ImUsers } from "react-icons/im";
+import { FiLogOut } from "react-icons/fi";
+import { useHistory } from "react-router";
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.white};
@@ -11,7 +13,7 @@ const Container = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  height: 140px;
+  height: 200px;
   padding: 15px 0px;
 `;
 
@@ -43,6 +45,11 @@ export default function NavBar({
   activePage,
 }) {
   let selected;
+  const history = useHistory();
+  const handleLogout = () => {
+    history.push("/");
+  }
+  
   return (
     <Container>
       <Button onClick={handleEstoqueClick}>
@@ -55,6 +62,12 @@ export default function NavBar({
       <ButtonContainer selected={selected}>
         <Button onClick={handleFuncionarioClick}>
           <ImUsers style={{ padding: "10px 10px" }} size={30} />
+        </Button>
+      </ButtonContainer>
+
+      <ButtonContainer>
+        <Button onClick={handleLogout}>
+          <FiLogOut style={{ padding: "10px 10px" }} size={30} />
         </Button>
       </ButtonContainer>
     </Container>
