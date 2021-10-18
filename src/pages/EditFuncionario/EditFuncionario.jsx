@@ -48,6 +48,10 @@ export default function EditFuncionario() {
         setEmail(response.data.email);
         setPhone(response.data.phone);
         //set Endereço
+        const array = response.data.address.split(',');
+        setRua(array[0]);
+        setNumero(array[1]);
+        setCidade(array[2]);
         
       } else {
         alert(
