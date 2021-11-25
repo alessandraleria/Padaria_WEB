@@ -1,20 +1,18 @@
 import React, { useState } from "react";
+import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router";
-import { BiSearchAlt, BiTrash } from "react-icons/bi";
-
 import {
+  ButtonDanger,
+  ButtonPrimary,
   CenterSection,
   Container,
-  Heading1,
   DetailText,
+  Heading1,
   Input,
-  ButtonPrimary,
-  ButtonDanger,
-  ButtonBlack,
 } from "../../components/styled";
 import api from "../../services/api";
 
-export default function EditEstoque() {
+export default function LançamentoEstoque() {
   const [productId, setProductId] = useState("");
   const [productCode, setProductCode] = useState("");
   const [productName, setProductName] = useState("");
@@ -53,30 +51,6 @@ export default function EditEstoque() {
     }
   };
 
-  const handleDelete = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await api.post("products/delete", {
-        id: productId,
-      });
-
-      if (response.data) {
-        if (response.data.success) {
-          alert("Produto deletado com sucesso!");
-          history.push("/estoque");
-        }
-      } else {
-        alert(
-          "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
-        );
-      }
-    } catch (err) {
-      console.log("Erro: " + err);
-      alert("Falha na exclusão, tente novamente.");
-    }
-  };
-
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -90,9 +64,6 @@ export default function EditEstoque() {
 
       if (response.data) {
         alert("Produto atualizado com sucesso!");
-        if (response.data.success) {
-          history.push("/estoque");
-        }
       } else {
         alert(
           "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
@@ -106,7 +77,7 @@ export default function EditEstoque() {
 
   return (
     <CenterSection>
-      <Container style={{ padding: "3rem", maxWidth: "700px" }}>
+      <Container style={{ padding: "3rem", maxWidth: "600px" }}>
         <Heading1
           style={{
             textAlign: "center",
@@ -114,7 +85,7 @@ export default function EditEstoque() {
             marginBottom: "4rem",
           }}
         >
-          Alterar dados de produto:
+          Lançamento de estoque
         </Heading1>
         <form
           onSubmit={handleSearch}
@@ -123,12 +94,13 @@ export default function EditEstoque() {
             alignItems: "end",
             marginBottom: "20px",
             width: "100%",
+            justifyContent: "space-around",
           }}
         >
-          <div>
+          <div style={{ width: "100%", marginRight: "15px" }}>
             <DetailText>Insira o Código do produto:</DetailText>
             <Input
-              style={{ marginBottom: "0", marginRight: "20px", width: "95%" }}
+              style={{ marginBottom: "0", marginRight: "20px", width: "100%" }}
               type="text"
               value={productCode}
               autoFocus
@@ -162,26 +134,30 @@ export default function EditEstoque() {
         >
           <div style={{ width: "100%" }}>
             <DetailText>Nome do produto:</DetailText>
-            <Input
-              type="text"
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
-            />
+            <Input disabled type="text" value={productName} />
+          </div>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <div style={{ marginRight: "25px" }}>
+              <DetailText>Quantidade Atual:</DetailText>
+              <Input disabled type="number" value={currentQuantity} />
+            </div>
+            <div>
+              <DetailText>Quantidade Mínima:</DetailText>
+              <Input disabled type="number" value={minimumQuantity} />
+            </div>
           </div>
           <div style={{ width: "100%" }}>
-            <DetailText>Quantidade Atual:</DetailText>
-            <Input
-              type="number"
-              value={currentQuantity}
-              onChange={(e) => setCurrentQuantity(e.target.value)}
-            />
-          </div>
-          <div style={{ width: "100%" }}>
-            <DetailText>Quantidade Mínima:</DetailText>
+            <DetailText>Insira nova quantidade:</DetailText>
             <Input
               type="number"
               value={minimumQuantity}
-              onChange={(e) => setMinimumQuantity(e.target.value)}
+              onChange={setCurrentQuantity}
             />
           </div>
           <div
@@ -203,16 +179,6 @@ export default function EditEstoque() {
             >
               Concluir
             </ButtonPrimary>
-            <ButtonBlack
-              style={{ width: "170px", padding: "15px 25px" }}
-              onClick={(e) => handleDelete(e)}
-            >
-              <BiTrash
-                size={20}
-                style={{ display: "inline-block", marginRight: "10px" }}
-              />
-              <span>Apagar</span>
-            </ButtonBlack>
           </div>
         </form>
       </Container>

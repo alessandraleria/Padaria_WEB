@@ -11,6 +11,7 @@ import AddEstoque from "./pages/AddEstoque/AddEstoque";
 import AddFuncionario from "./pages/AddFuncionario/AddFuncionario";
 import EditEstoque from "./pages/EditEstoque/EditEstoque";
 import EditFuncionario from "./pages/EditFuncionario/EditFuncionario";
+import LançamentoEstoque from "./pages/LançamentoEstoque/LançamentoEstoque";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <PrivateRoute path="/addEstoque" component={AddEstoque} />
           <PrivateRoute path="/editFuncionario" component={EditFuncionario} />
           <PrivateRoute path="/addFuncionario" component={AddFuncionario} />
+          <PrivateRoute path="/lancamento" component={LançamentoEstoque} />
         </Switch>
       </Router>
     </ThemeProvider>

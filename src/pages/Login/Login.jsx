@@ -43,6 +43,9 @@ const Login = () => {
           alert(response.data.message);
         } else {
           localStorage.setItem("isAuthenticated", true);
+          //////////////////////////////////////////////
+          console.log(response.data);
+          localStorage.setItem("accessLevel", response.data.data.access_level);
           history.push("/estoque");
         }
       } else {
