@@ -13,7 +13,7 @@ const Container = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  height: 200px;
+  height: 100%;
   padding: 15px 0px;
 `;
 
@@ -47,29 +47,50 @@ export default function NavBar({
   let selected;
   const history = useHistory();
   const handleLogout = () => {
+    localStorage.clear("isAuthenticated");
+    localStorage.clear("accessLevel");
     history.push("/");
-  }
-  
-  return (
-    <Container>
-      <Button onClick={handleEstoqueClick}>
-        {activePage === "Estoque" ? (selected = true) : (selected = false)}
-        <ButtonContainer selected={selected}>
-          <BsBoxSeam style={{ padding: "10px 10px" }} size={30} />
-        </ButtonContainer>
-      </Button>
-      {activePage === "Funcionarios" ? (selected = true) : (selected = false)}
-      <ButtonContainer selected={selected}>
-        <Button onClick={handleFuncionarioClick}>
-          <ImUsers style={{ padding: "10px 10px" }} size={30} />
-        </Button>
-      </ButtonContainer>
+  };
+  const accessLevel = localStorage.getItem("accessLevel");
 
-      <ButtonContainer>
-        <Button onClick={handleLogout}>
-          <FiLogOut style={{ padding: "10px 10px" }} size={30} />
+  if (accessLevel == 1) {
+    return (
+      <Container>
+        <Button onClick={handleEstoqueClick}>
+          {activePage === "Estoque" ? (selected = true) : (selected = false)}
+          <ButtonContainer selected={selected}>
+            <BsBoxSeam style={{ padding: "10px 10px" }} size={30} />
+          </ButtonContainer>
         </Button>
-      </ButtonContainer>
-    </Container>
-  );
+        {activePage === "Funcionarios" ? (selected = true) : (selected = false)}
+        <ButtonContainer selected={selected}>
+          <Button onClick={handleFuncionarioClick}>
+            <ImUsers style={{ padding: "10px 10px" }} size={30} />
+          </Button>
+        </ButtonContainer>
+
+        <ButtonContainer>
+          <Button onClick={handleLogout}>
+            <FiLogOut style={{ padding: "10px 10px" }} size={30} />
+          </Button>
+        </ButtonContainer>
+      </Container>
+    );
+  } else {
+    return (
+      <Container>
+        <Button onClick={handleEstoqueClick}>
+          {activePage === "Estoque" ? (selected = true) : (selected = false)}
+          <ButtonContainer selected={selected}>
+            <BsBoxSeam style={{ padding: "10px 10px" }} size={30} />
+          </ButtonContainer>
+        </Button>
+        <ButtonContainer>
+          <Button onClick={handleLogout}>
+            <FiLogOut style={{ padding: "10px 10px" }} size={30} />
+          </Button>
+        </ButtonContainer>
+      </Container>
+    );
+  }
 }
