@@ -18,6 +18,7 @@ export default function LançamentoEstoque() {
   const [productName, setProductName] = useState("");
   const [currentQuantity, setCurrentQuantity] = useState(null);
   const [minimumQuantity, setMinimumQuantity] = useState(null);
+  const [attQuantity, setAttQuantity] = useState("");
 
   const history = useHistory();
 
@@ -40,6 +41,7 @@ export default function LançamentoEstoque() {
         setProductName(response.data.name);
         setCurrentQuantity(response.data.current_quantity);
         setMinimumQuantity(response.data.minimum_quantity);
+        setAttQuantity(response.data.current_quantity);
       } else {
         alert(
           "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
@@ -58,7 +60,7 @@ export default function LançamentoEstoque() {
       const response = await api.post("products/edit", {
         id: productId,
         name: productName,
-        current_quantity: currentQuantity,
+        current_quantity: attQuantity,
         minimum_quantity: minimumQuantity,
       });
 
@@ -156,8 +158,8 @@ export default function LançamentoEstoque() {
             <DetailText>Insira nova quantidade:</DetailText>
             <Input
               type="number"
-              value={minimumQuantity}
-              onChange={setCurrentQuantity}
+              value={attQuantity}
+              onChange={(e) => setAttQuantity(e.target.value)}
             />
           </div>
           <div
@@ -171,7 +173,7 @@ export default function LançamentoEstoque() {
               style={{ width: "170px", padding: "15px 25px" }}
               onClick={(e) => handleCancel(e)}
             >
-              Cancelar
+              Sair
             </ButtonDanger>
             <ButtonPrimary
               style={{ width: "170px", padding: "15px 25px" }}
