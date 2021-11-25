@@ -103,7 +103,6 @@ export default function EditFuncionario() {
       if (response.data) {
         if (response.data.success) {
           alert("Funcionário atualizado com sucesso!");
-          history.push("/funcionarios");
         }
       } else {
         alert(
@@ -259,7 +258,7 @@ export default function EditFuncionario() {
               style={{ width: "170px", padding: "15px 25px" }}
               onClick={(e) => handleCancel(e)}
             >
-              Cancelar
+              Sair
             </ButtonDanger>
             <ButtonPrimary
               style={{ width: "170px", padding: "15px 25px" }}

@@ -88,11 +88,8 @@ export default function EditEstoque() {
         minimum_quantity: minimumQuantity,
       });
 
-      if (response.data) {
+      if (response.data.success) {
         alert("Produto atualizado com sucesso!");
-        if (response.data.success) {
-          history.push("/estoque");
-        }
       } else {
         alert(
           "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
@@ -195,7 +192,7 @@ export default function EditEstoque() {
               style={{ width: "170px", padding: "15px 25px" }}
               onClick={(e) => handleCancel(e)}
             >
-              Cancelar
+              Sair
             </ButtonDanger>
             <ButtonPrimary
               style={{ width: "170px", padding: "15px 25px" }}
