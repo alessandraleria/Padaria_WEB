@@ -16,6 +16,8 @@ import api from "../../services/api";
 export default function RedefinirSenha({ handleCancel }) {
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
+  const [password, setPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
 
   const history = useHistory();
 
@@ -23,25 +25,32 @@ export default function RedefinirSenha({ handleCancel }) {
     e.preventDefault();
 
      try {
-      const response = await api.post("users/redefinePassword", {
-        email,
-        cpf,
-      });
-      if (response.data) {
-        if (response.data.success !== true) {
-          alert(response.data.message);
+      if(password == confPassword){
+        const response = await api.post("users/redefinePassword", {
+          email,
+          cpf,
+          password
+        });
+        if (response.data) {
+          if (response.data.success !== true) {
+            alert(response.data.message);
+          } else {
+            localStorage.setItem("isAuthenticated", true);
+            history.push("/estoque");
+          }
         } else {
-          localStorage.setItem("isAuthenticated", true);
-          history.push("/estoque");
+          alert(
+            "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
+          );
         }
       } else {
         alert(
-          "\nServidor indisponível!\nPor favor, tente novamente mais tarde"
+          "\nAs senhas não coincidem!\nPor favor, insira a mesma senha no campo Senha e Confirmação de Senha."
         );
       }
     } catch (err) {
       console.log("Erro: " + err);
-      alert("Falha no login, tente novamente.");
+      alert("Falha na redefinição de senha, tente novamente.");
     } 
   }
 
@@ -84,6 +93,29 @@ export default function RedefinirSenha({ handleCancel }) {
               placeholder="Digite seu CPF"
               value={cpf}
               onChange={(e) => setCpf(e.target.value)}
+              required
+            />
+          </div>
+
+          <div style={{ width: "100%" }}>
+            <DetailText>Nova Senha:</DetailText>
+            <Input
+              type="password"
+              placeholder="Digite sua nova senha"
+              value={password}
+              autoFocus
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <div style={{ width: "100%" }}>
+            <DetailText>Confirmação de Senha:</DetailText>
+            <Input
+              type="password"
+              placeholder="Confirme sua senha"
+              value={confPassword}
+              onChange={(e) => setConfPassword(e.target.value)}
               required
             />
           </div>
