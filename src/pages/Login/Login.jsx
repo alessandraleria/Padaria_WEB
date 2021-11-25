@@ -47,6 +47,7 @@ const Login = () => {
           console.log(response.data);
           localStorage.setItem("accessLevel", response.data.data.access_level);
           history.push("/estoque");
+          alert("Login realizado com sucesso!");
         }
       } else {
         alert(

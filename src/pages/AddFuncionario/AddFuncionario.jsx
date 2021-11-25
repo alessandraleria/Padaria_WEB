@@ -186,7 +186,7 @@ export default function AddFuncionario() {
                 required
                 onClick={(e) => setAccessLevel(e.target.value)}
               />
-              <DetailText>Admin</DetailText>
+              <DetailText>Gerente/Administrador</DetailText>
             </div>
             <div style={{ display: "inline-block" }}>
               <input
@@ -197,7 +197,7 @@ export default function AddFuncionario() {
                 required
                 onClick={(e) => setAccessLevel(e.target.value)}
               />
-              <DetailText>Funcionario</DetailText>
+              <DetailText>Funcionário</DetailText>
             </div>
           </div>
 

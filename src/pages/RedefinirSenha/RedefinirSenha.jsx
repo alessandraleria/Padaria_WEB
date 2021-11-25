@@ -37,6 +37,7 @@ export default function RedefinirSenha({ handleCancel }) {
           } else {
             localStorage.setItem("isAuthenticated", true);
             history.push("/estoque");
+            alert("Senha redefinida com sucesso!");
           }
         } else {
           alert(
